@@ -8,6 +8,8 @@ use App\Models\Apartment\Apartment;
 use App\Models\Booking\Booking;
 use App\Models\Hotel\Hotel;
 use Auth;
+use Redirect;
+use Session;
 
 use DateTime;
 
@@ -53,8 +55,13 @@ if($request->check_in < $request->check_out){
         "room_name" => $room->name,
         "hotel_name" => $hotel->name,
     ]);
+    $totalPrice = $days * $room->price;
+    $price = Session::put('price',$totalPrice);
+
+    $getPrice = Session::get($price);
+    return Redirect::route('hotel.pay');
     
-    echo "You booked successfully.";
+ 
 
 }else{
     echo "Check out date should be grater than check in date";
@@ -65,6 +72,14 @@ if($request->check_in < $request->check_out){
     // echo strval($request->check_in);
     // echo strval($request->check_out);
 }
+    }
+
+
+    public function payWithPaypal(){
+        return view('hotels.pay');
+    }
+    public function success(){
+        return view('hotels.success');
     }
 
 }
