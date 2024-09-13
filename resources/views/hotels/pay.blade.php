@@ -19,6 +19,7 @@
 
     <div class="container">  
                     <!-- Replace "test" with your own sandbox Business account app client ID -->
+                    {{-- so basically the link below will be the business account to which the money is being sent. by clearly addingthe client ID --}}
                     <script src="https://www.paypal.com/sdk/js?client-id=AcCYK6AjBxfjEJF6_F5Cnfx7hiQnRMekVTQIAB5Evu68kmnD1-ZqlqKFi3gO_JmzNKFCDa9aI_UpVsjX&currency=USD"></script>
                     <!-- Set up a container element for the button -->
                     <div id="paypal-button-container"></div>
@@ -29,7 +30,8 @@
                             return actions.order.create({
                             purchase_units: [{
                                 amount: {
-                                value: '100' // Can also reference a variable or function
+                                    // creating a session that gets the price that we fetched earlier to have the amont to be dynamic
+                                value: '{{Session::get('price')}}' // Can also reference a variable or function
                                 }
                             }]
                             });

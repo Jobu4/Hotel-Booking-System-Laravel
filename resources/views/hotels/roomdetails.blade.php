@@ -15,7 +15,20 @@
           </div>
         </div>
       </div>
-  
+      <div class="container">
+        @if(session()->has('error'))
+        <div class="alert alert-success">
+          {{ session()->get('error') }}
+          </div>
+      @endif
+  </div>
+    <div class="container">
+      @if(session()->has('error_dates'))
+      <div class="alert alert-success">
+        {{ session()->get('error_dates') }}
+        </div>
+    @endif
+  </div>
       <section class="ftco-section ftco-book ftco-no-pt ftco-no-pb">
           <div class="container">
               <div class="row justify-content-end">

@@ -12,6 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
+        // 'check.for.price' => \App\Http\Middleware\CheckForPrice::class,
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

@@ -64,13 +64,13 @@ if($request->check_in < $request->check_out){
  
 
 }else{
-    echo "Check out date should be grater than check in date";
+    return Redirect::route('hotel.rooms.details', $room->id)->with(['error'=>"Check out date should be grater than check in date"]);
+    
 }
 }else{
-    echo "Choose dates in the future, invalid check in or check out date";
-    // echo strval(date("n/j/Y"));
-    // echo strval($request->check_in);
-    // echo strval($request->check_out);
+    return Redirect::route('hotel.rooms.details', $room->id)->with(['error_dates'=>"Choose dates in the future, invalid check in or check out date"]);
+
+ 
 }
     }
 
@@ -79,6 +79,8 @@ if($request->check_in < $request->check_out){
         return view('hotels.pay');
     }
     public function success(){
+// so having a validation of the session inorder to kill the session after transaction is complete
+        Session::forget('price');
         return view('hotels.success');
     }
 
